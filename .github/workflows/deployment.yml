@@ -17,3 +17,25 @@ jobs:
           script: |
             mkdir -p /opt/applications/gc/gestion-clients
             ls -al /opt/applications/gc
+
+  generate-image:
+    name: generate image
+    runs-on: ubuntu-latest
+    needs: ['create-folder']
+    steps:
+      - name: cloner le repertoire
+        uses: action/checkout@master
+      - name: setup java version
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+      - name: generate and push image
+        script:
+          mvn spring-boot:build-image \
+          -Ddocker.publishRegistry.username=${{secrets.DCH_USERNAME}} \
+          -Ddocker.publishRegistry.password=${{secrets.DCH_USERNAME}} \
+          -Dspring-boot.build-image.publish=true \
+          -Dmaven.test.skip=true
+
+
