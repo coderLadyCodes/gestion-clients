@@ -38,7 +38,7 @@ jobs:
         run: |
           ./mvnw clean package spring-boot:build-image \
           -Ddocker.publishRegistry.username=${{secrets.DCH_USERNAME}} \
-          -Ddocker.publishRegistry.password=${{secrets.DCH_USERNAME}} \
+          -Ddocker.publishRegistry.password=${{secrets.DCH_PASSWORD}} \
           -Dspring-boot.build-image.publish=true \
           -Dmaven.test.skip=true
 
