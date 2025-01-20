@@ -13,8 +13,7 @@ services:
       - user.fullname=${USER_NAME}
       - user.role=${USER_ROLE}
       - user.actif=${USER_ACTIF}
-      - JAVA_TOOL_OPTIONS=
-          -Xss200K
+      - JAVA_TOOL_OPTIONS=-Xss200K
     networks:
       - app-network
 networks:
