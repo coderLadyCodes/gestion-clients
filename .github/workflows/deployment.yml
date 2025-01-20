@@ -84,4 +84,4 @@ jobs:
             echo USER_ACTIF="${{ secrets.USER_ACTIF}}" >> /opt/applications/gc/${{ENV.IMAGE}}/ .env
             echo FRONTEND_URL="${{ secrets.FRONTEND_URL}}" >> /opt/applications/gc/${{ENV.IMAGE}}/ .env
             docker compose -f /opt/applications/gc/${{ env.IMAGE }}/compose.yml up -d
-            rm /opt/applications/gc/${{ env.IMAGE }}/.env
+
