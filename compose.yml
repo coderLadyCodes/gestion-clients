@@ -1,0 +1,15 @@
+services:
+  gestion-clients:
+    image: coderlady/gestion-clients:0.0.1-SNAPSHOT
+    container_name: gestion-clients
+    restart: always
+    environment:
+      - spring.datasource.url=${DB_HOST}
+      - spring.datasource.username=${DB_USERNAME}
+      - spring.datasource.password=${DB_PASSWORD}
+    networks:
+      - app-network
+networks:
+  app-network:
+    external: true
+    name: app-network
