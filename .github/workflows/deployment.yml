@@ -24,7 +24,7 @@ jobs:
     needs: ['create-folder']
     steps:
       - name: cloner le repertoire
-        uses: action/checkout@master
+        uses: actions/checkout@master
       - name: setup java version
         uses: actions/setup-java@v4
         with:
