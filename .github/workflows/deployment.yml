@@ -31,7 +31,7 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
       - name: generate and push image
-        script:
+        run: |
           mvn spring-boot:build-image \
           -Ddocker.publishRegistry.username=${{secrets.DCH_USERNAME}} \
           -Ddocker.publishRegistry.password=${{secrets.DCH_USERNAME}} \
