@@ -30,6 +30,10 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
+
+      - name: Make Maven Wrapper Executable
+        run: chmod +x ./mvnw
+
       - name: generate and push image
         run: |
           ./mvnw clean package spring-boot:build-image \
