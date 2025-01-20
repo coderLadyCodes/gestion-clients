@@ -5,16 +5,16 @@ services:
     restart: always
     env_file:
       - .env
-#    environment:
-#      - spring.datasource.url=${DB_HOST}
-#      - spring.datasource.username=${DB_USERNAME}
-#      - spring.datasource.password=${DB_PASSWORD}
-#      - user.password=${USER_PASSWORD}
-#      - user.email=${USER_EMAIL}
-#      - user.phone=${USER_PHONE}
-#      - user.fullname=${USER_NAME}
-#      - user.role=${USER_ROLE}
-#      - user.actif=${USER_ACTIF}
+    environment:
+      - spring.datasource.url=${DB_HOST}
+      - spring.datasource.username=${DB_USERNAME}
+      - spring.datasource.password=${DB_PASSWORD}
+      - user.password=${USER_PASSWORD}
+      - user.email=${USER_EMAIL}
+      - user.phone=${USER_PHONE}
+      - user.fullname=${USER_NAME}
+      - user.role=${USER_ROLE}
+      - user.actif=${USER_ACTIF}
       - JAVA_TOOL_OPTIONS=-Xss200K
     networks:
       - app-network
