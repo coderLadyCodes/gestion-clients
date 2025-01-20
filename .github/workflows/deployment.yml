@@ -15,5 +15,5 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           port: 22
           script: |
-            mkdi -p /opt/applications/gc/gestion-clients
+            mkdir -p /opt/applications/gc/gestion-clients
             ls -al /opt/applications/gc
