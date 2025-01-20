@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS refresh_tokens (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    expire BOOLEAN NOT NULL,
+    valeur VARCHAR(255) NOT NULL,
+    creation TIMESTAMP NOT NULL,
+    expiration TIMESTAMP NOT NULL
+);
