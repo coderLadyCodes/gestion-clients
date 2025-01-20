@@ -34,8 +34,8 @@ jobs:
           java-version: '21'
 
       - name: Make Maven Wrapper Executable
-        run: chmod +x ./mvnw
-
+        run: |
+          if [ -f ./mvnw ]; then chmod +x ./mvnw; else echo "mvnw not found"; exit 1; fi
       - name: generate and push image
         run: |
           ./mvnw clean package spring-boot:build-image \
@@ -73,4 +73,4 @@ jobs:
             echo DB_HOST="${{ secrets.DB_HOST}}" >> /opt/applications/gc/${{ENV.IMAGE}}/ .env
             echo DB_USERNAME="${{ secrets.DB_USERNAME}}" >> /opt/applications/gc/${{ENV.IMAGE}}/ .env
             echo DB_PASSWORD="${{ secrets.DB_PASSWORD}}" >> /opt/applications/gc/${{ENV.IMAGE}}/ .env
-            docker compose -f /opt/applications/gc/${{ENV.IMAGE}}/ compose.yml up -d
+            docker compose -f /opt/applications/gc/${{ env.IMAGE }}/compose.yml up -d
