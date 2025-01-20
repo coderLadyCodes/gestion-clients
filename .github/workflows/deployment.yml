@@ -32,7 +32,7 @@ jobs:
           java-version: '21'
       - name: generate and push image
         run: |
-          mvn spring-boot:build-image \
+          ./mvnw clean package spring-boot:build-image \
           -Ddocker.publishRegistry.username=${{secrets.DCH_USERNAME}} \
           -Ddocker.publishRegistry.password=${{secrets.DCH_USERNAME}} \
           -Dspring-boot.build-image.publish=true \
