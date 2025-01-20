@@ -72,7 +72,7 @@ jobs:
           script: |
             docker network inspect app-network >/dev/null 2>&1 || docker network create app-network
             
-            echo DB_HOST="${{ secrets.DB_HOST}}" >> /opt/applications/gc/${{ENV.IMAGE}}/ .env
+            echo DB_HOST="${{ secrets.DB_HOST}}" > /opt/applications/gc/${{ENV.IMAGE}}/ .env
             echo DB_USERNAME="${{ secrets.DB_USERNAME}}" >> /opt/applications/gc/${{ENV.IMAGE}}/ .env
             echo DB_PASSWORD="${{ secrets.DB_PASSWORD}}" >> /opt/applications/gc/${{ENV.IMAGE}}/ .env
             echo ENCRIPTION_KEY="${{ secrets.ENCRIPTION_KEY}}" >> /opt/applications/gc/${{ENV.IMAGE}}/ .env
@@ -84,3 +84,4 @@ jobs:
             echo USER_ACTIF="${{ secrets.USER_ACTIF}}" >> /opt/applications/gc/${{ENV.IMAGE}}/ .env
             echo FRONTEND_URL="${{ secrets.FRONTEND_URL}}" >> /opt/applications/gc/${{ENV.IMAGE}}/ .env
             docker compose -f /opt/applications/gc/${{ env.IMAGE }}/compose.yml up -d
+            rm /opt/applications/gc/${{ env.IMAGE }}/.env
