@@ -70,8 +70,7 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           port: 22
           script: |
-            docker network inspect app-network >/dev/null 2>&1 || docker network create app-network
-            
+            docker network inspect app-network >/dev/null 2>&1 || docker network create app-network   
             echo DB_HOST="${{ secrets.DB_HOST}}" > /opt/applications/gc/${{env.IMAGE}}/.env
             echo DB_USERNAME="${{ secrets.DB_USERNAME}}" >> /opt/applications/gc/${{env.IMAGE}}/.env
             echo DB_PASSWORD="${{ secrets.DB_PASSWORD}}" >> /opt/applications/gc/${{env.IMAGE}}/.env
