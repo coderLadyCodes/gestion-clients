@@ -29,7 +29,7 @@ public class Care {
     @JoinColumn(name = "program_id", nullable = true)
     private Program program;
 
-    @Column(name = "care_price")
+    @Column(name = "care_price" , columnDefinition = "decimal")
     private double carePrice;
 
     @Column(name = "quantity")
