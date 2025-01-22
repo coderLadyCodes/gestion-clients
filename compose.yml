@@ -3,6 +3,9 @@ services:
     image: coderlady/gestion-clients:0.0.1-SNAPSHOT
     container_name: gestion-clients
     restart: always
+    pull_policy: always
+    ports:
+      - 8080:8080
     env_file:
       - .env
     environment:
