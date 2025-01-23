@@ -104,7 +104,7 @@ public class UserController {
     private void setCookie(HttpServletResponse response, String name, String value, int maxAge, boolean isSecure) {
         //Cookie cookie = new Cookie(name, value);
         ResponseCookie cookie = ResponseCookie.from(name, value)
-                .httpOnly(true)
+                .httpOnly(false)
                 .secure(isSecure)
                 .sameSite(isSecure ? "None" : "Lax")
                 .path("/")
