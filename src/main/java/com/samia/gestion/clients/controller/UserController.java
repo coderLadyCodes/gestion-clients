@@ -91,7 +91,7 @@ public class UserController {
 
 
     public void addTokenCookies(Map<String, String> tokens, HttpServletResponse response) {
-        boolean isSecure = Boolean.parseBoolean(System.getenv().getOrDefault("COOKIE_SECURE", "false"));
+        boolean isSecure = Boolean.parseBoolean(System.getenv().getOrDefault("COOKIE_SECURE", "true"));
         setCookie(response, "token", tokens.get("bearer"),  1800, isSecure);
         setCookie(response, "refresh", tokens.get("refresh"),3600 , isSecure);
     }
@@ -104,7 +104,7 @@ public class UserController {
     private void setCookie(HttpServletResponse response, String name, String value, int maxAge, boolean isSecure) {
         //Cookie cookie = new Cookie(name, value);
         ResponseCookie cookie = ResponseCookie.from(name, value)
-                .httpOnly(false)
+                .httpOnly(true)
                 .secure(isSecure)
                 .sameSite(isSecure ? "None" : "Lax")
                 .path("/")
