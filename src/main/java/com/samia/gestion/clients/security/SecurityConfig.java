@@ -100,7 +100,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration configuration = new CorsConfiguration();
         //configuration.setAllowedOrigins(List.of(frontendUrl));
-        configuration.setAllowedOrigins(List.of("gc.guest-ltdc.fr", "guest-ltdc.fr"));
+        configuration.setAllowedOrigins(List.of("null","gc.guest-ltdc.fr", "guest-ltdc.fr", "46.202.130.99"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         //configuration.setAllowedHeaders(List.of("Authorization","Content-Type","X-XSRF-TOKEN", "X-Requested-With", "Accept"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
