@@ -59,6 +59,7 @@ public class UserController {
             return tokens;
         }
 
+
         throw new UnauthorizedException("Authentication failed");
     }
 
