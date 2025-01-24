@@ -55,6 +55,7 @@ public class SecurityConfig {
                                 authorize ->
                                         authorize
                                                 .requestMatchers(POST,"/login").permitAll()
+                                                .requestMatchers(POST,"/inscription").permitAll()
                                                 .requestMatchers(POST,"/logout").permitAll()
                                                 .requestMatchers(POST,"/refresh-token").permitAll()
                                                 .requestMatchers(GET,"/user/{id}").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")

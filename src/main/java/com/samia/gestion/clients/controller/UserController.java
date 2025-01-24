@@ -3,10 +3,12 @@ package com.samia.gestion.clients.controller;
 import com.samia.gestion.clients.DTO.AuthenticationDTO;
 import com.samia.gestion.clients.DTO.UserDTO;
 import com.samia.gestion.clients.entity.Jwt;
+import com.samia.gestion.clients.entity.Role;
 import com.samia.gestion.clients.entity.User;
 import com.samia.gestion.clients.exception.NotFoundException;
 import com.samia.gestion.clients.exception.UnauthorizedException;
 import com.samia.gestion.clients.repository.JwtRepository;
+import com.samia.gestion.clients.repository.UserRepository;
 import com.samia.gestion.clients.security.JwtService;
 import com.samia.gestion.clients.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,6 +19,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Duration;
@@ -29,17 +32,33 @@ public class UserController {
     private final UserService userService;
     private final JwtService jwtService;
     private final JwtRepository jwtRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserController(AuthenticationManager authenticationManager, UserService userService, JwtService jwtService, JwtRepository jwtRepository) {
+    public UserController(AuthenticationManager authenticationManager, UserService userService, JwtService jwtService, JwtRepository jwtRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.authenticationManager = authenticationManager;
         this.userService = userService;
         this.jwtService = jwtService;
         this.jwtRepository = jwtRepository;
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/identification")
     public String identification() {
         return "identifier";
+    }
+
+    @PostMapping("/inscription")
+    public void inscription(@RequestBody User user) throws Exception {
+        if (!userRepository.existsByEmail(user.getEmail())) {
+            user.setActif(true);
+            user.setRole(Role.USER);
+            user.setPassword(this.passwordEncoder.encode(user.getPassword()));
+            userRepository.save(user);
+        } else {
+            System.out.println("User with email " + user.getEmail() + " already exists.");
+        }
     }
 
     @PostMapping("/login")
@@ -58,6 +77,8 @@ public class UserController {
             addTokenCookies(tokens, response);
             return tokens;
         }
+
+
 
 
         throw new UnauthorizedException("Authentication failed");
