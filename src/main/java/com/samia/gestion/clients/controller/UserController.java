@@ -58,6 +58,7 @@ public class UserController {
             addTokenCookies(tokens, response);
             return tokens;
         }
+
         throw new UnauthorizedException("Authentication failed");
     }
 
