@@ -56,18 +56,18 @@ public class GestionClientsApplication  implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		if (!userRepository.existsByEmail(userEmail)) {
-			User user = User.builder()
-					.actif(userActif)
-					.name(userName)
-					.email(userEmail)
-					.phone(userPhone)
-					.password(passwordEncoder.encode(userPassword))
-					.role(userRole)
-					.build();
-			userRepository.save(user);
-		} else {
-			System.out.println("User with email " + userEmail + " already exists.");
-		}
+//		if (!userRepository.existsByEmail(userEmail)) {
+//			User user = User.builder()
+//					.actif(userActif)
+//					.name(userName)
+//					.email(userEmail)
+//					.phone(userPhone)
+//					.password(passwordEncoder.encode(userPassword))
+//					.role(userRole)
+//					.build();
+//			userRepository.save(user);
+//		} else {
+//			System.out.println("User with email " + userEmail + " already exists.");
+//		}
 	}
 }
