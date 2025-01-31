@@ -95,9 +95,9 @@ public class ClientService {
 
     @Transactional
     public ClientDTO createClient(ClientDTO clientDTO){
-    if (clientDTO.firstName() == null || clientDTO.lastName() == null || clientDTO.email() == null) {
-        throw new OtherExceptions( "Les champs sont obligatoires.");
-    }
+//    if (clientDTO.firstName() == null || clientDTO.lastName() == null || clientDTO.email() == null) {
+//        throw new OtherExceptions( "Les champs sont obligatoires.");
+//    }
     Client client = mapToClient(clientDTO);
         Optional<Client> existingClient = clientRepository.findByEmail(clientDTO.email());
         if(existingClient.isPresent()){
@@ -131,9 +131,9 @@ public class ClientService {
         if(id == null){
             throw new OtherExceptions("ID du client ne peut pas etre null.");
         }
-        if (clientDetails.firstName() == null || clientDetails.lastName() == null || clientDetails.email() == null) {
-            throw new OtherExceptions("Les champs sont obligatoires.");
-        }
+//        if (clientDetails.firstName() == null || clientDetails.lastName() == null || clientDetails.email() == null) {
+//            throw new OtherExceptions("Les champs sont obligatoires.");
+//        }
 
         Client client = clientRepository.findById(id).orElseThrow(()-> new NotFoundException("Client introuvable"));
         if(!client.getEmail().equals(clientDetails.email())){
@@ -168,7 +168,15 @@ public class ClientService {
 
   public PaginationResponse<ClientDTO> getAllClients(int page, int size, String search){
       PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "id"));
-        Page<Client> clientPage = clientRepository.searchClient(search, pageRequest);
+        //Page<Client> clientPage = clientRepository.searchClient(search, pageRequest);
+      // to handle empty search properly
+      Page<Client> clientPage;
+      if (search == null || search.trim().isEmpty()) {
+          clientPage = clientRepository.findAll(pageRequest); // Return all clients if no search
+      } else {
+          clientPage = clientRepository.searchClient(search, pageRequest);
+      }
+
         List<ClientDTO> clientDTOs =  clientPage.getContent().stream()
                 .map(this::mapToClientDTO)
                 .collect(Collectors.toList());
@@ -180,6 +188,7 @@ public class ClientService {
                 clientPage.getTotalElements()
         );
     }
+
     @Transactional
     public void deleteClient(Long clientId){
         if(clientId == null){
