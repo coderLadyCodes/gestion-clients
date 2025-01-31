@@ -29,7 +29,7 @@ public class Client {
     @Column(name = "comments", columnDefinition="LONGTEXT")
     private String comments;
 
-    @Column(name="email")
+    @Column(name="email", nullable = true)
     private String email;
 
     @Column(name="mobile_phone")

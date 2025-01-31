@@ -99,11 +99,13 @@ public class ClientService {
 //        throw new OtherExceptions( "Les champs sont obligatoires.");
 //    }
     Client client = mapToClient(clientDTO);
-        Optional<Client> existingClient = clientRepository.findByEmail(clientDTO.email());
-        if(existingClient.isPresent()){
-            throw new AlreadyExistsException("Utilisateur existe déja");
+//        Optional<Client> existingClient = clientRepository.findByEmail(clientDTO.email());
+//        if(existingClient.isPresent()){
+//            throw new AlreadyExistsException("Utilisateur existe déja");
+//        }
+        if (clientDTO.email() != null && clientDTO.email().trim().isEmpty()) {
+            client.setEmail(null);
         }
-
         Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !(authentication.getPrincipal() instanceof User)) {
             throw new UnauthorizedException("Utilisateur non authentifié");
