@@ -99,10 +99,10 @@ public class ClientService {
 //        throw new OtherExceptions( "Les champs sont obligatoires.");
 //    }
     Client client = mapToClient(clientDTO);
-//        Optional<Client> existingClient = clientRepository.findByEmail(clientDTO.email());
-//        if(existingClient.isPresent()){
-//            throw new AlreadyExistsException("Utilisateur existe déja");
-//        }
+        Optional<Client> existingClient = clientRepository.findByEmail(clientDTO.email());
+        if(existingClient.isPresent()){
+            throw new AlreadyExistsException("l'adresse mail est déja utilisée");
+        }
         if (clientDTO.email() != null && clientDTO.email().trim().isEmpty()) {
             client.setEmail(null);
         }
