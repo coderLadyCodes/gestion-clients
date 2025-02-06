@@ -14,6 +14,7 @@ import java.util.List;
         @Index(name = "idx_last_name_first_name", columnList = "last_name, first_name"),
         @Index(name = "idx_zip_code", columnList = "zip_code")
 })
+
 public class Client {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
