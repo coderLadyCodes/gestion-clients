@@ -111,7 +111,7 @@ public boolean isTokenExpired(String token) { //, Jwt tokenInDb
 
     private Map<String, String> generateJwt(User user) {
         final long currentTime = System.currentTimeMillis();
-        final long expirationTime = currentTime + 5 * 60 * 1000;
+        final long expirationTime = currentTime + 5 * 60 * 60 * 1000; // 5 hours
 
         final Map<String, Object> claims =  Map.of(
                 "name", user.getName(),
