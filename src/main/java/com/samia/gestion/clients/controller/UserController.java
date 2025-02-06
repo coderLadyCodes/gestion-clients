@@ -114,7 +114,7 @@ public class UserController {
 
     public void addTokenCookies(Map<String, String> tokens, HttpServletResponse response) {
         boolean isSecure = Boolean.parseBoolean(System.getenv().getOrDefault("COOKIE_SECURE", "true"));
-        setCookie(response, "token", tokens.get("bearer"),  1800, isSecure);
+        setCookie(response, "token", tokens.get("bearer"),  300, isSecure); //1800 30min
         setCookie(response, "refresh", tokens.get("refresh"),3600 , isSecure);
     }
 
