@@ -2,6 +2,7 @@ package com.samia.gestion.clients.DTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
@@ -12,7 +13,7 @@ public record CareDTO(
         Long userId,
         ProductDTO productDTO,
         Long programId,
-        double carePrice,
+        BigDecimal carePrice,
         int quantity,
         int durationWeeks,
         @JsonProperty("timeSlot")

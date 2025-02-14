@@ -14,6 +14,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -64,9 +66,10 @@ public class ProgramService {
         program.setClientId(client.getId());
         program.setCreatedDate(LocalDate.now());
         program.setCares(cares);
-        double totalProgramPrice = program.getCares().stream()
-                .mapToDouble(Care::getCarePrice)
-                .sum();
+        BigDecimal totalProgramPrice = program.getCares().stream()
+                .map(Care::getCarePrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        //.sum();
         program.setTotalProgramPrice(totalProgramPrice);
 
         programRepository.save(program);
@@ -177,9 +180,10 @@ public class ProgramService {
             programRepository.delete(program);
             return null;
         }
-        double totalProgramPrice = program.getCares().stream()
-                .mapToDouble(Care::getCarePrice)
-                .sum();
+        BigDecimal totalProgramPrice = program.getCares().stream()
+                .map(Care::getCarePrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+                //.sum();
         program.setTotalProgramPrice(totalProgramPrice);
 
         Program updatedProgram = programRepository.save(program);

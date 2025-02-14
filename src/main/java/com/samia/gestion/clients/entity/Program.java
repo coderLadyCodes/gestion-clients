@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +29,11 @@ public class Program {
     @JoinColumn(name = "created_date")
     private LocalDate createdDate;
 
-    @Column(name = "total_program_price")
-    private double totalProgramPrice;
+//    @Column(name = "total_program_price")
+//    private double totalProgramPrice;
+    @Column(name = "total_program_price", columnDefinition = "DECIMAL(10,2)")
+    private BigDecimal totalProgramPrice;
+
 
     @OneToMany(mappedBy = "program", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Care> cares = new ArrayList<>();
@@ -39,7 +43,7 @@ public class Program {
         this.id = id;
     }
 
-    public Program(Long userId, Long clientId, String programReference, LocalDate createdDate, double totalProgramPrice, List<Care> cares) {
+    public Program(Long userId, Long clientId, String programReference, LocalDate createdDate, BigDecimal totalProgramPrice, List<Care> cares) {
         this.userId = userId;
         this.clientId = clientId;
         this.programReference = programReference;
@@ -48,7 +52,7 @@ public class Program {
         this.cares = cares;
     }
 
-    public Program(Long id, Long userId, Long clientId, String programReference, LocalDate createdDate, double totalProgramPrice, List<Care> cares) {
+    public Program(Long id, Long userId, Long clientId, String programReference, LocalDate createdDate, BigDecimal totalProgramPrice, List<Care> cares) {
         this.id = id;
         this.userId = userId;
         this.clientId = clientId;
@@ -98,11 +102,11 @@ public class Program {
         this.createdDate = createdDate;
     }
 
-    public double getTotalProgramPrice() {
+    public BigDecimal getTotalProgramPrice() {
         return totalProgramPrice;
     }
 
-    public void setTotalProgramPrice(double totalProgramPrice) {
+    public void setTotalProgramPrice(BigDecimal totalProgramPrice) {
         this.totalProgramPrice = totalProgramPrice;
     }
 

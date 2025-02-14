@@ -3,6 +3,8 @@ package com.samia.gestion.clients.entity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
+
+import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
@@ -29,8 +31,10 @@ public class Care {
     @JoinColumn(name = "program_id", nullable = true)
     private Program program;
 
-    @Column(name = "care_price" , columnDefinition = "decimal")
-    private double carePrice;
+//    @Column(name = "care_price" , columnDefinition = "decimal")
+//    private double carePrice;
+    @Column(name = "care_price", columnDefinition = "DECIMAL(10,2)")
+    private BigDecimal carePrice;  // Use BigDecimal instead of double
 
     @Column(name = "quantity")
     private int quantity;
@@ -59,7 +63,7 @@ public class Care {
 
     public Care() {}
 
-    public Care(Long clientId, Long userId, Product product, Program program, double carePrice, int quantity, int durationWeeks, List<String> timeSlot, List<DayOfWeek> daysOfWeek, LocalDate created, LocalDate modified) {
+    public Care(Long clientId, Long userId, Product product, Program program, BigDecimal carePrice, int quantity, int durationWeeks, List<String> timeSlot, List<DayOfWeek> daysOfWeek, LocalDate created, LocalDate modified) {
         this.clientId = clientId;
         this.userId = userId;
         this.product = product;
@@ -73,7 +77,7 @@ public class Care {
         this.modified = modified;
     }
 
-    public Care(Long id, Long clientId, Long userId, Product product, Program program, double carePrice, int quantity, int durationWeeks, List<String> timeSlot, List<DayOfWeek> daysOfWeek, LocalDate created, LocalDate modified) {
+    public Care(Long id, Long clientId, Long userId, Product product, Program program, BigDecimal carePrice, int quantity, int durationWeeks, List<String> timeSlot, List<DayOfWeek> daysOfWeek, LocalDate created, LocalDate modified) {
         this.id = id;
         this.clientId = clientId;
         this.userId = userId;
@@ -128,11 +132,11 @@ public class Care {
         this.program = program;
     }
 
-    public double getCarePrice() {
+    public BigDecimal getCarePrice() {
         return carePrice;
     }
 
-    public void setCarePrice(double carePrice) {
+    public void setCarePrice(BigDecimal carePrice) {
         this.carePrice = carePrice;
     }
 

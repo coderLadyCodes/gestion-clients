@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,11 +60,14 @@ public class CareService {
             throw new OtherExceptions("La quantité ne peut pas être négative.");
         }
 
-        if (careDTO.carePrice() < 0) {
-            throw new OtherExceptions("Le prix du soin ne peut pas être négatif.");
-        }
+//        if (careDTO.carePrice() < 0) {
+//            throw new OtherExceptions("Le prix du soin ne peut pas être négatif.");
+//        }
 
-        double calculatedCarePrice = product.getProductPrice() * careDTO.quantity();
+        //double calculatedCarePrice = product.getProductPrice() * careDTO.quantity();
+        BigDecimal bdProductPrice = BigDecimal.valueOf(product.getProductPrice());
+        BigDecimal bdQuantity = BigDecimal.valueOf(careDTO.quantity());
+        BigDecimal calculatedCarePrice = bdProductPrice.multiply(bdQuantity);
 
         Care care = careMapper.mapToCare(careDTO);
         care.setProduct(product);
@@ -105,10 +109,14 @@ public class CareService {
         if (careDetails.quantity() < 0) {
             throw new OtherExceptions("La quantité ne peut pas être négative.");
         }
-        if (careDetails.carePrice() < 0) {
-            throw new OtherExceptions("Le prix du soin ne peut pas être négatif.");
-        }
-        double calculatedCarePrice = product.getProductPrice() * careDetails.quantity();
+//        if (careDetails.carePrice() < 0) {
+//            throw new OtherExceptions("Le prix du soin ne peut pas être négatif.");
+//        }
+
+        //double calculatedCarePrice = product.getProductPrice() * careDetails.quantity();
+        BigDecimal bdProductPrice = BigDecimal.valueOf(product.getProductPrice());
+        BigDecimal bdQuantity = BigDecimal.valueOf(careDetails.quantity());
+        BigDecimal calculatedCarePrice = bdProductPrice.multiply(bdQuantity);
 
         Program program = careDetails.programId() != null
                 ? programRepository.findById(careDetails.programId())
