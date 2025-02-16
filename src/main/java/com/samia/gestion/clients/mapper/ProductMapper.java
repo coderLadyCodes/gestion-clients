@@ -39,7 +39,8 @@ public class ProductMapper {
             categoryDTO = new CategoryDTO(
                     product.getCategory().getId(),
                     product.getCategory().getUserId(),
-                    product.getCategory().getName()
+                    product.getCategory().getName(),
+                    product.getCategory().getTva().getValue()
             );
         }
 

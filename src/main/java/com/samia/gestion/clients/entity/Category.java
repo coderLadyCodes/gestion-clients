@@ -19,17 +19,23 @@ public class Category {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tva", nullable = true)
+    private Tva tva;
+
     public Category() {}
 
-    public Category(Long userId, String name) {
+    public Category(Long userId, String name, Tva tva) {
         this.userId = userId;
         this.name = name;
+        this.tva = tva;
     }
 
-    public Category(Long id, Long userId, String name) {
+    public Category(Long id, Long userId, String name, Tva tva) {
         this.id = id;
         this.userId = userId;
         this.name = name;
+        this.tva = tva;
     }
 
     public Long getId() {
@@ -56,12 +62,25 @@ public class Category {
         this.name = name;
     }
 
+    public Tva getTva() {
+        return tva;
+    }
+    public String getTvaValue() {
+        return tva != null ? tva.getValue() : "Aucune TVA";
+    }
+
+
+    public void setTva(Tva tva) {
+        this.tva = tva;
+    }
+
     @Override
     public String toString() {
         return "Category{" +
                 "id=" + id +
                 ", userId=" + userId +
                 ", name='" + name + '\'' +
+                ", tva=" + tva +
                 '}';
     }
 }

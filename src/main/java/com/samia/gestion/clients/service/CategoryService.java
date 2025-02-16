@@ -2,6 +2,7 @@ package com.samia.gestion.clients.service;
 
 import com.samia.gestion.clients.DTO.CategoryDTO;
 import com.samia.gestion.clients.entity.Category;
+import com.samia.gestion.clients.entity.Tva;
 import com.samia.gestion.clients.entity.User;
 import com.samia.gestion.clients.exception.AlreadyExistsException;
 import com.samia.gestion.clients.exception.NotFoundException;
@@ -30,17 +31,23 @@ public class CategoryService {
     }
 
     public Category mapToCatygory(CategoryDTO categoryDTO){
+        Tva tvaEnum = (categoryDTO.tva() != null) ? Tva.fromValue(categoryDTO.tva()) : null;
         return new Category(
                 categoryDTO.id(),
                 categoryDTO.userId(),
-                categoryDTO.name()
+                categoryDTO.name(),
+                //categoryDTO.tva()
+                tvaEnum
         );
     }
     public CategoryDTO maptoCategoryDTO(Category category){
+        String tvaValue = (category.getTva() != null) ? category.getTva().getValue() : null;
         return new CategoryDTO(
                 category.getId(),
                 category.getUserId(),
-                category.getName()
+                category.getName(),
+                //category.getTva()
+                tvaValue
         );
     }
 
@@ -97,6 +104,19 @@ public class CategoryService {
             }
         }
         category.setName(categoryDetails.name() != null ? categoryDetails.name() : category.getName());
+        //category.setTva(categoryDetails.tva() != null ? categoryDetails.tva() : category.getTva());
+//        // Check if "Aucune TVA" is selected in the frontend
+//        if ("".equals(categoryDetails.tva())) {
+//            category.setTva(null);  // Set to null if "Aucune TVA" is selected
+//        } else {
+//            category.setTva(categoryDetails.tva() != null ? categoryDetails.tva() : category.getTva());
+//        }
+
+        // Update the tva
+        if (categoryDetails.tva() != null) {
+            category.setTva(Tva.fromValue(categoryDetails.tva())); // Convert string to enum
+        }
+
         Category updatedCategory = categoryRepository.save(category);
         return maptoCategoryDTO(updatedCategory);
     }
