@@ -8,6 +8,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,6 +24,7 @@ import java.util.Arrays;
 
 @Service
 public class JwtFilter extends OncePerRequestFilter {
+    private static final Logger logger = LoggerFactory.getLogger(JwtFilter.class);
     private final HandlerExceptionResolver handlerExceptionResolver;
     private final UserService userService;
     private final JwtService jwtService;
@@ -52,7 +55,7 @@ public class JwtFilter extends OncePerRequestFilter {
             if(authorization == null && cookies != null){
                 authorization = getCookieValue(request, "token");
             }
-          System.out.println("Cookie " + authorization);
+          logger.info("Cookie " + authorization);
             if (cookies != null && authorization != null && authorization.startsWith("Bearer ")) {
                 token = authorization.substring(7);
 
@@ -60,15 +63,15 @@ public class JwtFilter extends OncePerRequestFilter {
                 isTokenExpired = jwtService.isTokenExpired(token);
                 username = jwtService.extractUsername(token);
             }
-            System.out.println("63 is token expired " + isTokenExpired);
+            logger.info("63 is token expired " + isTokenExpired);
             if (!isTokenExpired
                     && tokenInDb.getUser().getEmail().equals(username)
 
                     && SecurityContextHolder.getContext().getAuthentication() == null) {
-                System.out.println("68 is token expired " + isTokenExpired);
+                logger.info("68 is token expired " + isTokenExpired);
                 UserDetails userDetails = userService.loadUserByUsername(username);
                 if (userDetails != null) {
-                    System.out.println("71 is token expired " + isTokenExpired);
+                    logger.info("71 is token expired " + isTokenExpired);
                     UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, true, userDetails.getAuthorities());
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                 }
