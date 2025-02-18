@@ -35,12 +35,16 @@ public class ProductMapper {
     }
     public static ProductDTO mapToProductDTO(Product product){
         CategoryDTO categoryDTO = null;
+        String value = null;
+        if(product.getCategory() != null && product.getCategory().getTva() != null){
+            value = product.getCategory().getTva().getValue();
+        }
         if (product.getCategory() != null) {
             categoryDTO = new CategoryDTO(
                     product.getCategory().getId(),
                     product.getCategory().getUserId(),
                     product.getCategory().getName(),
-                    product.getCategory().getTva().getValue()
+                    value
             );
         }
 
