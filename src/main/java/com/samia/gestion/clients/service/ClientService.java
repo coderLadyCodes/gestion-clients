@@ -64,7 +64,43 @@ public class ClientService {
                 clientDTO.modified(),
                 clientDTO.sex(),
                 clientDTO.userId(),
-                programs
+                programs,
+                clientDTO.stress(),
+                clientDTO.stressPsychoaffectif(),
+                clientDTO.fumezVousCombien(),
+                clientDTO.dereglementHormonal(),
+                clientDTO.crisesEpilepsie(),
+                clientDTO.interventionsChirurgicales(),
+                clientDTO.pacemaker(),
+                clientDTO.anticoagulants(),
+                clientDTO.allergiesOuIntolerances(),
+                clientDTO.problemesThyroidiens(),
+                clientDTO.chimiotherapie(),
+                clientDTO.fatigueGenerale(),
+                clientDTO.regimeAlimentaire(),
+                clientDTO.carences(),
+                clientDTO.gastroplastie(),
+                clientDTO.menopause(),
+                clientDTO.moyenContraception(),
+                clientDTO.reglesAbondantes(),
+                clientDTO.enceinte(),
+                clientDTO.enfant2DerniereAnnee(),
+                clientDTO.chuteApresAccouchement(),
+                clientDTO.interruptionAllaitement(),
+                clientDTO.fausseCouche(),
+                clientDTO.herediteChuteCheveux(),
+                clientDTO.calvitie(),
+                clientDTO.cheveuxPeuAbondants(),
+                clientDTO.pelade(),
+                clientDTO.cheveuxGras(),
+                clientDTO.cheveuxSecs(),
+                clientDTO.chuteCheveuxDepuisQuand(),
+                clientDTO.typeChute(),
+                clientDTO.trichotillomanie(),
+                clientDTO.nombreShampoingsParSemaine(),
+                clientDTO.apresShampoingMasque(),
+                clientDTO.methodesAgressivesCoiffage(),
+                clientDTO.alimentation()
         );
     }
     public ClientDTO mapToClientDTO(Client client){
@@ -89,7 +125,43 @@ public class ClientService {
                 client.getModified(),
                 client.getSex(),
                 client.getUserId(),
-                programDTOList
+                programDTOList,
+                client.getStress(),
+                client.getStressPsychoaffectif(),
+                client.getFumezVousCombien(),
+                client.getDereglementHormonal(),
+                client.getCrisesEpilepsie(),
+                client.getInterventionsChirurgicales(),
+                client.getPacemaker(),
+                client.getAnticoagulants(),
+                client.getAllergiesOuIntolerances(),
+                client.getProblemesThyroidiens(),
+                client.getChimiotherapie(),
+                client.getFatigueGenerale(),
+                client.getRegimeAlimentaire(),
+                client.getCarences(),
+                client.getGastroplastie(),
+                client.getMenopause(),
+                client.getMoyenContraception(),
+                client.getReglesAbondantes(),
+                client.getEnceinte(),
+                client.getEnfant2DerniereAnnee(),
+                client.getChuteApresAccouchement(),
+                client.getInterruptionAllaitement(),
+                client.getFausseCouche(),
+                client.getHerediteChuteCheveux(),
+                client.getCalvitie(),
+                client.getCheveuxPeuAbondants(),
+                client.getPelade(),
+                client.getCheveuxGras(),
+                client.getCheveuxSecs(),
+                client.getChuteCheveuxDepuisQuand(),
+                client.getTypeChute(),
+                client.getTrichotillomanie(),
+                client.getNombreShampoingsParSemaine(),
+                client.getApresShampoingMasque(),
+                client.getMethodesAgressivesCoiffage(),
+                client.getAlimentation()
         );
     }
 
@@ -157,6 +229,44 @@ public class ClientService {
         client.setZipCode(clientDetails.zipCode() != null ? clientDetails.zipCode() : client.getZipCode());
         client.setSex(clientDetails.sex() != null ? clientDetails.sex() : client.getSex());
         client.setModified(LocalDate.now());
+        // Handling new fields
+        client.setStress(clientDetails.stress() != null ? clientDetails.stress() : client.getStress());
+        client.setStressPsychoaffectif(clientDetails.stressPsychoaffectif() != null ? clientDetails.stressPsychoaffectif() : client.getStressPsychoaffectif());
+        client.setFumezVousCombien(clientDetails.fumezVousCombien() != null ? clientDetails.fumezVousCombien() : client.getFumezVousCombien());
+        client.setDereglementHormonal(clientDetails.dereglementHormonal() != null ? clientDetails.dereglementHormonal() : client.getDereglementHormonal());
+        client.setCrisesEpilepsie(clientDetails.crisesEpilepsie() != null ? clientDetails.crisesEpilepsie() : client.getCrisesEpilepsie());
+        client.setInterventionsChirurgicales(clientDetails.interventionsChirurgicales() != null ? clientDetails.interventionsChirurgicales() : client.getInterventionsChirurgicales());
+        client.setPacemaker(clientDetails.pacemaker() != null ? clientDetails.pacemaker() : client.getPacemaker());
+        client.setAnticoagulants(clientDetails.anticoagulants() != null ? clientDetails.anticoagulants() : client.getAnticoagulants());
+        client.setAllergiesOuIntolerances(clientDetails.allergiesOuIntolerances() != null ? clientDetails.allergiesOuIntolerances() : client.getAllergiesOuIntolerances());
+        client.setProblemesThyroidiens(clientDetails.problemesThyroidiens() != null ? clientDetails.problemesThyroidiens() : client.getProblemesThyroidiens());
+        client.setChimiotherapie(clientDetails.chimiotherapie() != null ? clientDetails.chimiotherapie() : client.getChimiotherapie());
+        client.setFatigueGenerale(clientDetails.fatigueGenerale() != null ? clientDetails.fatigueGenerale() : client.getFatigueGenerale());
+        client.setRegimeAlimentaire(clientDetails.regimeAlimentaire() != null ? clientDetails.regimeAlimentaire() : client.getRegimeAlimentaire());
+        client.setCarences(clientDetails.carences() != null ? clientDetails.carences() : client.getCarences());
+        client.setGastroplastie(clientDetails.gastroplastie() != null ? clientDetails.gastroplastie() : client.getGastroplastie());
+        client.setMenopause(clientDetails.menopause() != null ? clientDetails.menopause() : client.getMenopause());
+        client.setMoyenContraception(clientDetails.moyenContraception() != null ? clientDetails.moyenContraception() : client.getMoyenContraception());
+        client.setReglesAbondantes(clientDetails.reglesAbondantes() != null ? clientDetails.reglesAbondantes() : client.getReglesAbondantes());
+        client.setEnceinte(clientDetails.enceinte() != null ? clientDetails.enceinte() : client.getEnceinte());
+        client.setEnfant2DerniereAnnee(clientDetails.enfant2DerniereAnnee() != null ? clientDetails.enfant2DerniereAnnee() : client.getEnfant2DerniereAnnee());
+        client.setChuteApresAccouchement(clientDetails.chuteApresAccouchement() != null ? clientDetails.chuteApresAccouchement() : client.getChuteApresAccouchement());
+        client.setInterruptionAllaitement(clientDetails.interruptionAllaitement() != null ? clientDetails.interruptionAllaitement() : client.getInterruptionAllaitement());
+        client.setFausseCouche(clientDetails.fausseCouche() != null ? clientDetails.fausseCouche() : client.getFausseCouche());
+        client.setHerediteChuteCheveux(clientDetails.herediteChuteCheveux() != null ? clientDetails.herediteChuteCheveux() : client.getHerediteChuteCheveux());
+        client.setCalvitie(clientDetails.calvitie() != null ? clientDetails.calvitie() : client.getCalvitie());
+        client.setCheveuxPeuAbondants(clientDetails.cheveuxPeuAbondants() != null ? clientDetails.cheveuxPeuAbondants() : client.getCheveuxPeuAbondants());
+        client.setPelade(clientDetails.pelade() != null ? clientDetails.pelade() : client.getPelade());
+        client.setCheveuxGras(clientDetails.cheveuxGras() != null ? clientDetails.cheveuxGras() : client.getCheveuxGras());
+        client.setCheveuxSecs(clientDetails.cheveuxSecs() != null ? clientDetails.cheveuxSecs() : client.getCheveuxSecs());
+        client.setChuteCheveuxDepuisQuand(clientDetails.chuteCheveuxDepuisQuand() != null ? clientDetails.chuteCheveuxDepuisQuand() : client.getChuteCheveuxDepuisQuand());
+        client.setTypeChute(clientDetails.typeChute() != null ? clientDetails.typeChute() : client.getTypeChute());
+        client.setTrichotillomanie(clientDetails.trichotillomanie() != null ? clientDetails.trichotillomanie() : client.getTrichotillomanie());
+        client.setNombreShampoingsParSemaine(clientDetails.nombreShampoingsParSemaine() != null ? clientDetails.nombreShampoingsParSemaine() : client.getNombreShampoingsParSemaine());
+        client.setApresShampoingMasque(clientDetails.apresShampoingMasque() != null ? clientDetails.apresShampoingMasque() : client.getApresShampoingMasque());
+        client.setMethodesAgressivesCoiffage(clientDetails.methodesAgressivesCoiffage() != null ? clientDetails.methodesAgressivesCoiffage() : client.getMethodesAgressivesCoiffage());
+        client.setAlimentation(clientDetails.alimentation() != null ? clientDetails.alimentation() : client.getAlimentation());
+
 
         if(clientDetails.programDTOS() != null){
             List<Program> updatedPrograms = clientDetails.programDTOS().stream()

@@ -30,5 +30,42 @@ public record ClientDTO(
         LocalDate modified,
         Sex sex,
         Long userId,
-        List<ProgramDTO> programDTOS
+        List<ProgramDTO> programDTOS,
+        // Newly added fields
+        String stress,                  // Stress
+        String stressPsychoaffectif,    // Stress Psychoaffectif
+        String fumezVousCombien,        // Fumez-vous ? Combien ?
+        String dereglementHormonal,     // Dereglement Hormonal
+        String crisesEpilepsie,         // Crises d’Épilepsie
+        String interventionsChirurgicales, // Interventions Chirurgicales
+        String pacemaker,               // Pacemaker
+        String anticoagulants,          // Anticoagulants
+        String allergiesOuIntolerances,   // Allergies ou Intolérances
+        String problemesThyroidiens,    // Problèmes Thyroïdiens
+        String chimiotherapie,          // Chimiothérapie
+        String fatigueGenerale,         // Fatigue Générale
+        String regimeAlimentaire,       // Régime Alimentaire
+        String carences,                // Carences
+        String gastroplastie,           // Gastroplastie
+        String menopause,               // Ménopause
+        String moyenContraception,      // Moyen de Contraception
+        String reglesAbondantes,        // Règles Abondantes
+        String enceinte,                // Enceinte
+        String enfant2DerniereAnnee,  // Enfant 2 Dernières Années
+        String chuteApresAccouchement,  // Chute Après Accouchement
+        String interruptionAllaitement, // Interruption Allaitement
+        String fausseCouche,            // Fausse Coucher
+        String herediteChuteCheveux,  // Hérédité Chute De Cheveux
+        String calvitie,                // Calvitie
+        String cheveuxPeuAbondants,     // Cheveux Peu Abondants
+        String pelade,                  // Pelade
+        String cheveuxGras,             // Cheveux Gras
+        String cheveuxSecs,             // Cheveux Secs
+        String chuteCheveuxDepuisQuand, // Chute De Cheveux ? Depuis Quand ?
+        String typeChute,             // Type De Chute
+        String trichotillomanie,        // Trichotillomanie
+        String nombreShampoingsParSemaine,      // Nombre de Shampoings Par Semaine
+        String apresShampoingMasque,  // Après Shampoing Ou Masque
+        String methodesAgressivesCoiffage, // Méthodes Agressives De Coiffage
+        String alimentation             // Alimentation
 ) {}
