@@ -30,18 +30,24 @@ public class ClientController {
     }
 
 //    @GetMapping("/clients")
-//    public List<ClientDTO> getAllClients(@RequestParam(value = "page", defaultValue = "0", required = false) int page,
-//                                         @RequestParam(value = "size", defaultValue = "20", required = false) int size){
-//        return clientService.getAllClients(page,size); //NOT SURE FOR PAGINATION
+//    @ResponseBody
+//    public PaginationResponse<ClientDTO> getAllClients(@RequestParam(value = "page", defaultValue = "0", required = false) int page,
+//                                                       @RequestParam(value = "size", defaultValue = "20", required = false) int size,
+//                                                       @RequestParam(value = "search", required = false) String search){
+//        return clientService.getAllClients(page,size,search);
 //    }
+@GetMapping("/clients")
+@ResponseBody
+public PaginationResponse<ClientDTO> getAllClients(
+        @RequestParam(value = "page", defaultValue = "0", required = false) int page,
+        @RequestParam(value = "size", defaultValue = "20", required = false) int size,
+        @RequestParam(value = "search", required = false) String search,
+        @RequestParam(value = "sortBy", defaultValue = "lastName", required = false) String sortBy,  // Default to sorting by lastName
+        @RequestParam(value = "direction", defaultValue = "asc", required = false) String direction  // Default to ascending order
+) {
+    return clientService.getAllClients(page, size, search, sortBy, direction);
+}
 
-    @GetMapping("/clients")
-    @ResponseBody
-    public PaginationResponse<ClientDTO> getAllClients(@RequestParam(value = "page", defaultValue = "0", required = false) int page,
-                                                       @RequestParam(value = "size", defaultValue = "20", required = false) int size,
-                                                       @RequestParam(value = "search", required = false) String search){
-        return clientService.getAllClients(page,size,search);
-    }
 
     @DeleteMapping("/client/{id}")
     public void deleteClient(@PathVariable(value = "id") Long id){

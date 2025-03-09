@@ -49,18 +49,6 @@ public class UserController {
         return "identifier";
     }
 
-//    @PostMapping("/inscription")
-//    public void inscription(@RequestBody User user) throws Exception {
-//        if (!userRepository.existsByEmail(user.getEmail())) {
-//            user.setActif(true);
-//            user.setRole(Role.USER);
-//            user.setPassword(this.passwordEncoder.encode(user.getPassword()));
-//            userRepository.save(user);
-//        } else {
-//            System.out.println("User with email " + user.getEmail() + " already exists.");
-//        }
-//    }
-
     @PostMapping("/login")
     public Map<String, String> login(@RequestBody AuthenticationDTO authDTO, HttpServletResponse response) {
         Authentication auth = authenticationManager.authenticate(
@@ -77,10 +65,6 @@ public class UserController {
             addTokenCookies(tokens, response);
             return tokens;
         }
-
-
-
-
         throw new UnauthorizedException("Authentication failed");
     }
 

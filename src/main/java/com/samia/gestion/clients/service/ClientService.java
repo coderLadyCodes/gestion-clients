@@ -278,28 +278,56 @@ public class ClientService {
         return mapToClientDTO(updatedClient);
     }
 
-  public PaginationResponse<ClientDTO> getAllClients(int page, int size, String search){
-      PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "id"));
-        //Page<Client> clientPage = clientRepository.searchClient(search, pageRequest);
-      // to handle empty search properly
-      Page<Client> clientPage;
-      if (search == null || search.trim().isEmpty()) {
-          clientPage = clientRepository.findAll(pageRequest); // Return all clients if no search
-      } else {
-          clientPage = clientRepository.searchClient(search, pageRequest);
-      }
+//  public PaginationResponse<ClientDTO> getAllClients(int page, int size, String search){
+//      PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "id"));
+//      // to handle empty search properly
+//      Page<Client> clientPage;
+//      if (search == null || search.trim().isEmpty()) {
+//          clientPage = clientRepository.findAll(pageRequest); // Return all clients if no search
+//      } else {
+//          clientPage = clientRepository.searchClient(search, pageRequest);
+//      }
+//
+//        List<ClientDTO> clientDTOs =  clientPage.getContent().stream()
+//                .map(this::mapToClientDTO)
+//                .collect(Collectors.toList());
+//
+//        return new PaginationResponse<>(
+//                clientDTOs,
+//                page,
+//                clientPage.getTotalPages(),
+//                clientPage.getTotalElements()
+//        );
+//    }
+public PaginationResponse<ClientDTO> getAllClients(int page, int size, String search, String sortBy, String direction) {
+    // Determine sort direction (ascending by default)
+    Sort.Direction sortDirection = direction.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
 
-        List<ClientDTO> clientDTOs =  clientPage.getContent().stream()
-                .map(this::mapToClientDTO)
-                .collect(Collectors.toList());
+    // Create a PageRequest object with the sorting criteria
+    PageRequest pageRequest = PageRequest.of(page, size, Sort.by(sortDirection, sortBy));
 
-        return new PaginationResponse<>(
-                clientDTOs,
-                page,
-                clientPage.getTotalPages(),
-                clientPage.getTotalElements()
-        );
+    // Handle empty search properly
+    Page<Client> clientPage;
+    if (search == null || search.trim().isEmpty()) {
+        clientPage = clientRepository.findAll(pageRequest); // Return all clients if no search
+    } else {
+        clientPage = clientRepository.searchClient(search, pageRequest); // Filter clients based on search term
     }
+
+    // Map clients to DTOs
+    List<ClientDTO> clientDTOs = clientPage.getContent().stream()
+            .map(this::mapToClientDTO)
+            .collect(Collectors.toList());
+
+    // Return the paginated response with client DTOs
+    return new PaginationResponse<>(
+            clientDTOs,
+            page,
+            clientPage.getTotalPages(),
+            clientPage.getTotalElements()
+    );
+}
+
 
     @Transactional
     public void deleteClient(Long clientId){

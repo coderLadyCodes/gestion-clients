@@ -55,8 +55,8 @@ public class SecurityConfig {
                                 authorize ->
                                         authorize
                                                 .requestMatchers(POST,"/login").permitAll()
-                                                .requestMatchers(POST,"/inscription").permitAll()
                                                 .requestMatchers(POST,"/logout").permitAll()
+                                                //.requestMatchers(PUT,"/admin/change-password").permitAll() // I HAVE TO DELETE IT OR PUT IT IN .ENV FILE
                                                 .requestMatchers(POST,"/refresh-token").permitAll()
                                                 .requestMatchers(GET,"/user/{id}").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                                                 .requestMatchers(PUT,"/user/{id}").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
