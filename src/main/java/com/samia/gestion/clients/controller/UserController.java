@@ -68,6 +68,25 @@ public class UserController {
         throw new UnauthorizedException("Authentication failed");
     }
 
+    // I HAVE TO DELETE THIS
+    @PutMapping("/change-password")
+    public String changePassword(@RequestBody Map<String, String> passwordData) throws Exception {
+        String username = passwordData.get("username");
+        String oldPassword = passwordData.get("oldPassword");
+        String newPassword = passwordData.get("newPassword");
+        User user = userService.loadUserByUsername(username);
+        if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
+            return "Error: Old password is incorrect!";
+        }
+        if (passwordEncoder.matches(newPassword, user.getPassword())) {
+            return "Error: New password cannot be the same as the old password!";}
+        user.setPassword(passwordEncoder.encode(newPassword));
+        user.setRole(Role.USER);
+        user.setActif(true);
+        userRepository.save(user);
+        return "Password changed successfully!";
+    }
+
     @PostMapping("/refresh-token")
     public Map<String, String> refreshToken(HttpServletRequest request, HttpServletResponse response) {
         String refreshToken = jwtService.getCookieValue(request, "refresh");

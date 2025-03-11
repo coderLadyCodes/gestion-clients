@@ -6,6 +6,7 @@ import com.samia.gestion.clients.exception.NotFoundException;
 import com.samia.gestion.clients.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,11 +14,12 @@ import java.util.stream.Collectors;
 @Service
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
 
-
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
     public User mapToUser(UserDTO userDTO){
         return new User(
